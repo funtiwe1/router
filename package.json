@@ -1,0 +1,24 @@
+{
+  "name": "router",
+  "version": "1.0.0",
+  "description": "ari router app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/funtiwe1/router.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/funtiwe1/router/issues"
+  },
+  "homepage": "https://github.com/funtiwe1/router#readme",
+  "dependencies": {
+    "@google-cloud/speech": "^4.9.0",
+    "@google-cloud/text-to-speech": "^3.3.1",
+    "ari-client": "^2.2.0"
+  }
+}

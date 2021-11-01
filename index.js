@@ -13,10 +13,16 @@ const IP_ASTERSERVER = '5.189.230.61';
 const APPNAME = 'router';
 
 
-let r =  client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181cb101335ce689eba',function (err, ari) {
+
+client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181cb101335ce689eba',function (e, ari) {
   //client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181cb101335ce689eba',function (err, ari) {
-  if (err) throw new Error(err.message)
   let log = new Log('router.log');
+  if (e) {
+    log.log('Error connect asterisk ari')
+    log.log(e.message);
+    return;
+  }
+
   log.log('Connected to asterisk');
   ari.start(APPNAME);
   log.log('Started '+APPNAME+' app');
@@ -86,8 +92,3 @@ let r =  client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf23
     });
   });
 })
-.catch((e)=>{
-  log.log('Error','Error asterisk ari')
-  log.log(e.message);
-});
-//r.then(console.log(r));

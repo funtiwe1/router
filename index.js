@@ -13,9 +13,10 @@ const IP_ASTERSERVER = '5.189.230.61';
 const APPNAME = 'router';
 
 
-client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181cb101335ce689eba',function (err, ari) {
+let r =  client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181cb101335ce689eba',function (err, ari) {
   //client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181cb101335ce689eba',function (err, ari) {
-  let log = new Log('aaa');
+  if (err) throw new Error(err.message)
+  let log = new Log('router.log');
   log.log('Connected to asterisk');
   ari.start(APPNAME);
   log.log('Started '+APPNAME+' app');
@@ -45,10 +46,11 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
     .then(async ()=>{
       playback.on('PlaybackFinished',async ()=>{
         log.log(key,'Finished play');
+          usrv = new udpserver.RtpUdpServerSocket(IP_RTPSERVER + ':' + port,rs);
         //
-        outgoing.on('ChannelDtmfReceived', async (ev,ch)=>{
-
-        });
+        // outgoing.on('ChannelDtmfReceived', async (ev,ch)=>{
+        //
+        // });
         try {
         rs = asr();
         rs.on('data',(d)=>{
@@ -68,7 +70,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
         log.log('Error get asr');
         throw new Error(e.message);
       }
-        usrv = new udpserver.RtpUdpServerSocket(IP_RTPSERVER + ':' + port,rs);
+
       });
       log.log(key,'Started play');
     }).catch((e)=>{
@@ -84,4 +86,8 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
     });
   });
 })
-.catch((e)=>{log.log('Error','Error asterisk ari')});
+.catch((e)=>{
+  log.log('Error','Error asterisk ari')
+  log.log(e.message);
+});
+//r.then(console.log(r));

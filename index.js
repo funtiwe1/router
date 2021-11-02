@@ -42,6 +42,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
     let text = 'Вы!';
     let filename = 'del_'+new Date().getTime();
     let port = curport++;
+    let rtext = '';
 
     try {
       filename = await tts(text,filename,'\/var/spool\/asterisk\/recording\/');
@@ -73,9 +74,14 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
 
 //          console.log(rs)
           rs.on('data',(d)=>{
-            let r = d.results[0].alternatives[0].transcript;
-            log.log(r);
-            if (!r) return;
+            rtext = d.results[0].alternatives[0].transcript;
+            log.log(rtext);
+          });
+
+          setTimeout(()=>{
+            if (!rtext) return;
+            let r = rtext;
+            rtext = '';
             switch (r) {
               case 'Повторялка':outgoing.move({app:'ivr'});break;
               case 'Автоответчики': outgoing.move({app:'amd'});break;
@@ -85,7 +91,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
                 //outgoing.play({media:'recording:'+filename},playback);
               };
             }
-          });
+          },2000);
         } catch(e) {
           log.log('Error get asr');
           throw new Error(e.message);

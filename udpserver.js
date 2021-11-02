@@ -30,7 +30,7 @@ class RtpUdpServerSocket {
 					buf = msg.slice(12);
 					//buf.swap16();
 					// console.log('1');
-					 console.log(buf);
+					 //console.log(buf);
 				}
 			else {
 				if (c<10) {
@@ -56,7 +56,7 @@ class RtpUdpServerSocket {
 					// console.log('finish');
 					// console.log(typeof(buf));
 					buf.swap16();
-					console.log(buf);
+					//console.log(buf);
 					let ret = this.rs.write(buf);
 					buf = null;
 					c=0;

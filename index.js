@@ -66,10 +66,11 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
       log.log('Finished play');
       getRTP(ari,APPNAME,IP_RTPSERVER,port,outgoing)
       .then((d)=>{
-        usrv = new udpserver.RtpUdpServerSocket(IP_RTPSERVER + ':' + port,rs);
         try {
           rs = asr();
-          console.log(rs)
+          usrv = new udpserver.RtpUdpServerSocket(IP_RTPSERVER + ':' + port,rs);
+
+          //console.log(rs)
           rs.on('data',(d)=>{
             log.log(d);
             let r = d.results[0].alternatives[0].transcript;

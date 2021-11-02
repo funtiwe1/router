@@ -63,7 +63,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
 
     function record() {
       log.log('Finished play');
-      getRTP(ari,APPNAME,IP_RTPSERVER,port)
+      getRTP(ari,APPNAME,IP_RTPSERVER,port,outgoing)
       .then((d)=>{
         usrv = new udpserver.RtpUdpServerSocket(IP_RTPSERVER + ':' + port,rs);
         try {

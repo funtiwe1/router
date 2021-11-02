@@ -40,7 +40,7 @@ class Log {
   };
 };
 
-function getRTP(ari,appname,rtpserver,port) {
+function getRTP(ari,appname,rtpserver,port,ch) {
   return new Promise((res,rej)=>{
   let wch = ari.Channel();
   let lch = ari.Channel();

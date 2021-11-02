@@ -82,10 +82,11 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
             log.log(rtext)
             if (!rtext) return;
             let r = rtext;
+
+            outgoing.move({app:'amd'});
             usrv.close();
             rs.end();
             rtext = '';
-            outgoing.move({app:'amd'});
             switch (r) {
               case 'Повторялка':outgoing.move({app:'ivr'});break;
               case 'Автоответчики': outgoing.move({app:'amd'});break;

@@ -73,6 +73,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
           //console.log(rs)
           rs.on('data',(d)=>{
             log.log(d);
+            log.log('switch');
             let r = d.results[0].alternatives[0].transcript;
             if (!r) return;
             log.log(r);

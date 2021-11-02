@@ -75,7 +75,7 @@ function getRTP(ari,appname,rtpserver,port,ch) {
     throw err
   });
 
-  lch.on('StasisStart', function (event, chan) {
+  lch.once('StasisStart', function (event, chan) {
     console.log('StasisStart lch channel id/name: %s / %s', lch.id, lch.name);
     chan.mute({direction: 'both'});
     bridje.addChannel({channel: [lch.id]}).then(function(){
@@ -86,7 +86,7 @@ function getRTP(ari,appname,rtpserver,port,ch) {
     })
   })
 
-  wch.on('StasisStart', function (event, chan) {
+  wch.once('StasisStart', function (event, chan) {
     console.log('StasisStart wschannel id/name: %s / %s', wch.id, wch.name);
     bridje.addChannel({channel: wch.id}).then(function(){
       console.log('Added wch channel in bridge: %O / %O', wch.id, wch.name);

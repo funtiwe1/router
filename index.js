@@ -62,27 +62,30 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
 
     function record() {
       log.log('Finished play');
+      getRTP(ari,APPNAME,IP_RTPSERVER,port)
+      .then((d)=>{
         usrv = new udpserver.RtpUdpServerSocket(IP_RTPSERVER + ':' + port,rs);
-      try {
-      rs = asr();
-      rs.on('data',(d)=>{
-        log.log(d);
-        let r = d.results[0].alternatives[0].transcript;
-        if (!r) return;
-        log.log(r);
-        switch (r) {
-        case 'Повторялка':break;
-        case 'Автоответчики': break;
-        default:{
-          let playback = new ari.Playback();
-          outgoing.play({media:'recording:'+filename},playback);
-        };
-      }
+        try {
+          rs = asr();
+          rs.on('data',(d)=>{
+            log.log(d);
+            let r = d.results[0].alternatives[0].transcript;
+            if (!r) return;
+            log.log(r);
+            switch (r) {
+              case 'Повторялка':break;
+              case 'Автоответчики': break;
+              default:{
+                let playback = new ari.Playback();
+                outgoing.play({media:'recording:'+filename},playback);
+              };
+            }
+          });
+        } catch(e) {
+          log.log('Error get asr');
+          throw new Error(e.message);
+        }
       });
-    } catch(e) {
-      log.log('Error get asr');
-      throw new Error(e.message);
-    }
     }
 
     outgoing.once('StasisEnd', function (event, ch) {

@@ -45,15 +45,15 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
       filename = await tts(text,filename,'\/var/spool\/asterisk\/recording\/');
     } catch(e){
       log.log('Error get tts');
-      //throw new Error(e.message);
+      throw new Error(e.message);
     }
 
     let playback = new ari.Playback();
     outgoing.play({media:'recording:'+filename},playback)
     .then(async ()=>{
-      record();
+      //record();
       playback.on('PlaybackFinished',async ()=>{
-        //record();
+        record();
       });
       log.log('Started play');
     }).catch((e)=>{

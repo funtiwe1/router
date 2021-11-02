@@ -44,6 +44,9 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
     let port = curport++;
     let rtext = '';
 
+    // play(text,ari,outgoing)
+    // .then(record())
+
     try {
       filename = await tts(text,filename,'\/var/spool\/asterisk\/recording\/');
     } catch(e){

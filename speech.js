@@ -219,7 +219,7 @@ function asr_s(obj) {
   } catch(e) {
     return new Error(e.message);
   }
-
+  console.log(recognizeStream)
   return recognizeStream;
 }
 

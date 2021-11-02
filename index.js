@@ -34,7 +34,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
   let curport = 8010;
   //let external_host = IP_RTPSERVER + ':' + port;
 
-  ari.on('StasisStart', async (event, outgoing)=> {
+  ari.once('StasisStart', async (event, outgoing)=> {
     log.log('StasisStart %s',outgoing.id);
     let rs = null;
     let usrv = null;
@@ -72,17 +72,15 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
 
           //console.log(rs)
           rs.on('data',(d)=>{
-            log.log(d);
-            log.log('switch');
             let r = d.results[0].alternatives[0].transcript;
-            if (!r) return;
             log.log(r);
+            if (!r) return;
             switch (r) {
               case 'Повторялка':break;
               case 'Автоответчики': break;
               default:{
                 let playback = new ari.Playback();
-                outgoing.play({media:'recording:'+filename},playback);
+                //outgoing.play({media:'recording:'+filename},playback);
               };
             }
           });

@@ -71,16 +71,17 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
           rs = asr();
           usrv = new udpserver.RtpUdpServerSocket(IP_RTPSERVER + ':' + port,rs);
 
-          console.log(rs)
+//          console.log(rs)
           rs.on('data',(d)=>{
             let r = d.results[0].alternatives[0].transcript;
             log.log(r);
             if (!r) return;
             switch (r) {
-              case 'Повторялка':break;
-              case 'Автоответчики': break;
+              case 'Повторялка':outgoing.move({app:'ivr'});break;
+              case 'Автоответчики': outgoing.move({app:'amd'});break;
               default:{
-                let playback = new ari.Playback();
+                //let playback = new ari.Playback();
+                outgoing.move({app:'amd'});
                 //outgoing.play({media:'recording:'+filename},playback);
               };
             }

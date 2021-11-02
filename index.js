@@ -8,6 +8,7 @@ const Log = require('./utils.js').Log
 const udpserver = require('./udpserver')
 const asr = require('./speech').asr_s
 const tts = require('./speech').tts_f
+const getRTP = require('./utils').getRTP
 
 const IP_RTPSERVER = '5.189.230.61';
 const IP_ASTERSERVER = '5.189.230.61';

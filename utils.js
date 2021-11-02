@@ -112,3 +112,4 @@ function getRTP(ari,appname,rtpserver,port) {
 
 module.exports.sleep = sleep
 module.exports.Log = Log
+module.exports.getRTP = getRTP

@@ -64,12 +64,12 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
 
     function record() {
       log.log('Finished play');
-      usrv = new udpserver.RtpUdpServerSocket(IP_RTPSERVER + ':' + port,rs);
 
       getRTP(ari,APPNAME,IP_RTPSERVER,port,outgoing)
       .then((d)=>{
         try {
           rs = asr();
+          usrv = new udpserver.RtpUdpServerSocket(IP_RTPSERVER + ':' + port,rs);
 
           console.log(rs)
           rs.on('data',(d)=>{

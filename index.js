@@ -38,7 +38,8 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
     log.log('StasisStart %s',outgoing.id);
     let rs = null;
     let usrv = null;
-    let text = 'Вы находитесь в главном меню. Для выбора приложения введите цифру. Один - повторялка. Два - АМД!';
+    //let text = 'Вы находитесь в главном меню. Для выбора приложения введите цифру. Один - повторялка. Два - АМД!';
+    let text = 'Вы!';
     let filename = 'del_'+new Date().getTime();
     let port = curport++;
 
@@ -68,6 +69,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
         usrv = new udpserver.RtpUdpServerSocket(IP_RTPSERVER + ':' + port,rs);
         try {
           rs = asr();
+          console.log(rs)
           rs.on('data',(d)=>{
             log.log(d);
             let r = d.results[0].alternatives[0].transcript;

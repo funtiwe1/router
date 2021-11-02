@@ -33,7 +33,7 @@ class RtpUdpServerSocket {
 					 //console.log(buf);
 				}
 			else {
-				if ((c<10) || (rs===null)) {
+				if ((c<10) || (this.rs===null)) {
 					// console.log(c);
 					// console.log(buf);
 					let r = msg.slice(12);

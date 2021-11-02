@@ -71,7 +71,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
         try {
           rs = asr();
 
-          //console.log(rs)
+          console.log(rs)
           rs.on('data',(d)=>{
             let r = d.results[0].alternatives[0].transcript;
             log.log(r);

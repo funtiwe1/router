@@ -75,7 +75,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
 //          console.log(rs)
           rs.on('data',(d)=>{
             rtext = d.results[0].alternatives[0].transcript;
-            log.log(rtext);
+            //log.log(rtext);
           });
 
           setTimeout(()=>{

@@ -74,7 +74,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
 
 //          console.log(rs)
           rs.on('data',(d)=>{
-            rtext += d.results[0].alternatives[0].transcript;
+            rtext = d.results[0].alternatives[0].transcript;
             log.log(rtext);
           });
 
@@ -82,6 +82,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
             log.log(rtext)
             if (!rtext) return;
             let r = rtext;
+            usrv.close();
             rs.end();
             rtext = '';
             switch (r) {

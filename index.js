@@ -74,11 +74,12 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
 
 //          console.log(rs)
           rs.on('data',(d)=>{
-            rtext = d.results[0].alternatives[0].transcript;
+            rtext += d.results[0].alternatives[0].transcript;
             log.log(rtext);
           });
 
           setTimeout(()=>{
+            log.log(rtext)
             if (!rtext) return;
             let r = rtext;
             rtext = '';
@@ -91,7 +92,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
                 //outgoing.play({media:'recording:'+filename},playback);
               };
             }
-          },2000);
+          },5000);
         } catch(e) {
           log.log('Error get asr');
           throw new Error(e.message);

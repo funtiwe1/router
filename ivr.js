@@ -78,7 +78,6 @@ class IVR {
 
 record(time,log){
   return new Promise((res,rej)=>{
-    function record() {
       log.log('Start record');
       getRTP(this.ari,this.appname,this.rtpserver,this.port,this.ch)
       .then((d)=>{
@@ -101,7 +100,6 @@ record(time,log){
           throw new Error(e.message);
         }
       });
-    }
   })
 }
 }

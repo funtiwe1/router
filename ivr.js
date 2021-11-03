@@ -50,10 +50,8 @@ class IVR {
     this.usrv = new udpserver.RtpUdpServerSocket(this.rtpserver + ':' + this.port,this.rs);
   }
 
-  play(text) {
+  play(text,log) {
     return new Promise(async (res,rej)=>{
-      let   log = new Log('router.log');
-
     let filename = 'del_'+new Date().getTime();
     try {
       filename = await tts(text,filename,'\/var/spool\/asterisk\/recording\/');
@@ -78,7 +76,7 @@ class IVR {
   })
 }
 
-record(time){
+record(time,log){
   return new Promise((res,rej)=>{
     function record() {
       log.log('Start record');

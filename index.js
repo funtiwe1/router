@@ -44,7 +44,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
 
     ivr.play(text,log)
     .then((d)=>{
-      ivr.record(2000,log)
+      ivr.record(5000,log)
       .then((d)=>{
         log.log(d);
         switch (d) {

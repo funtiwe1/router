@@ -44,8 +44,6 @@ class IVR {
     this.rs = this.client
     .streamingRecognize(request_g)
     .on('error', console.error)
-  } catch(e) {
-    return new Error(e.message)
 
     this.usrv = new udpserver.RtpUdpServerSocket(this.rtpserver + ':' + this.port,this.rs);
   }

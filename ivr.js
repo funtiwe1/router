@@ -82,7 +82,7 @@ record(time,log){
       log.log('Start record');
       this.rs.on('data',(d)=>{
         this.last_text = d.results[0].alternatives[0].transcript;
-        log.log(this.last_text);
+        //log.log(this.last_text);
       });
 
       getRTP(this.ari,this.appname,this.rtpserver,this.port,this.ch)

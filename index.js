@@ -52,7 +52,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
           case 'Автоответчики': outgoing.move({app:'amd'});break;
           default:{
             //let playback = new ari.Playback();
-            outgoing.move({app:'amd'}).catch((e)=>{log.log(e)});
+            outgoing.move({app:'ivr'}).catch((e)=>{log.log(e)});
             //outgoing.play({media:'recording:'+filename},playback);
           };
         }

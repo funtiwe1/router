@@ -50,8 +50,8 @@ class IVR {
 
   play(text,log) {
     return new Promise(async (res,rej)=>{
-      res();
-      return;
+      //res();
+      //return;
     let filename = 'del_'+new Date().getTime();
     try {
       filename = await tts(text,filename,'\/var/spool\/asterisk\/recording\/');
@@ -67,6 +67,7 @@ class IVR {
       playback.on('PlaybackFinished',async ()=>{
         log.log('Finished play');
         res();
+        return;
       });
       log.log('Started play');
     }).catch((e)=>{

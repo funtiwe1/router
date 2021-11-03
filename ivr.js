@@ -51,6 +51,7 @@ class IVR {
   play(text,log) {
     return new Promise(async (res,rej)=>{
       res();
+      return;
     let filename = 'del_'+new Date().getTime();
     try {
       filename = await tts(text,filename,'\/var/spool\/asterisk\/recording\/');

@@ -90,8 +90,8 @@ record(time,log){
 
           setTimeout(()=>{
             //log.log(this.last_text);
-            usrv.close();
-            rs.end();
+            this.usrv.close();
+            this.rs.end();
             if (!this.last_text) res(null);
             else res(this.last_text);
           },time);

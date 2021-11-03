@@ -46,7 +46,7 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
     .then((d)=>{
       ivr.record(5000,log)
       .then((d)=>{
-        //log.log(d);
+        log.log(d);
         switch (d) {
           case 'Повторялка':outgoing.move({app:'ivr'});break;
           case 'Автоответчики': outgoing.move({app:'amd'});break;

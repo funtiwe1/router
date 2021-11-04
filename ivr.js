@@ -78,8 +78,10 @@ record(time,log){
             //log.log(this.last_text);
             //this.usrv.close();
             //this.rs.end();
-            if (!this.last_text) res(null);
-            else res(this.last_text);
+            let t = this.last_text;
+            this.last_text = '';
+            if (!t) res(null);
+            else res(t);
           },time);
         } catch(e) {
           log.log('Error get asr');

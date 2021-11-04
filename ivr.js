@@ -77,7 +77,7 @@ record(time,log){
           setTimeout(()=>{
             //log.log(this.last_text);
             //this.usrv.close();
-            //this.rs.end();
+            this.rs.end();
             let t = this.last_text;
             this.last_text = '';
             if (!t) res(null);

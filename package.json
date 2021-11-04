@@ -20,6 +20,6 @@
     "@google-cloud/speech": "^4.9.0",
     "@google-cloud/text-to-speech": "^3.3.1",
     "ari-client": "^2.2.0",
-    "iuspeech": "https://github.com/funtiwe1/iuspeech.git#1.0.0"
+    "iuspeech": "git://github.com/funtiwe1/iuspeech.git"
   }
 }

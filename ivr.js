@@ -5,7 +5,7 @@ const Log = require('./utils.js').Log
 const asr = require('./speech').asr_s
 const tts = require('./speech').tts_f
 const getRTP = require('./utils').getRTP
-
+const playRecprd = require('./utils').playRecprd
 
 const encoding = 'LINEAR16';
 const sampleRateHertz = 16000;
@@ -50,30 +50,16 @@ class IVR {
 
   play(text,log) {
     return new Promise(async (res,rej)=>{
-      //res();
-      //return;
     let filename = 'del_'+new Date().getTime();
     try {
       filename = await tts(text,filename,'\/var/spool\/asterisk\/recording\/');
     } catch(e){
       log.log('Error get tts');
-      throw new Error(e.message);
+      rej(e.message);
+      return;
     }
 
-    let playback = new this.ari.Playback();
-    this.ch.play({media:'recording:'+filename},playback)
-    .then(async ()=>{
-      //record();
-      playback.on('PlaybackFinished',async ()=>{
-        log.log('Finished play');
-        res();
-        return;
-      });
-      log.log('Started play');
-    }).catch((e)=>{
-      throw new Error(e.message);
-    });
-
+    playRecord(this.ari,this.ch,filename,log).then(res()).catch((e)=>rej(e));
   })
 }
 

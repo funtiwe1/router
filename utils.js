@@ -110,6 +110,24 @@ function getRTP(ari,appname,rtpserver,port,ch) {
 })
 }
 
+function playRecord(ari,ch,filename,log) {
+  return new Promise((res,rej)=>{
+    let playback = new ari.Playback();
+    ch.play({media:'recording:'+filename},playback)
+    .then(async ()=>{
+      playback.on('PlaybackFinished',async ()=>{
+        log.log('Finished play');
+        res();
+        return;
+      });
+      log.log('Started play');
+    }).catch((e)=>{
+      rej(e.message);
+    })
+  })
+}
+
 module.exports.sleep = sleep
 module.exports.Log = Log
 module.exports.getRTP = getRTP
+module.exports.playRecord = playRecord

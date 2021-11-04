@@ -16,10 +16,10 @@ const APPNAME = 'router';
 
 
 
-client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181cb101335ce689eba',function (e, ari) {
+client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181cb101335ce689eba',function async (e, ari) {
   //client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181cb101335ce689eba',function (err, ari) {
   let log = new Log('router.log');
-  let curport = 8010;
+  let curport = 8011;
   let text = 'Вы находитесь в главном меню. Для выбора приложения введите цифру. Один - повторялка. Два - АМД!';
   let ivr = null;
 
@@ -42,22 +42,36 @@ client.connect('http:\/\/' + IP_ASTERSERVER + ':8088', 'amd', '57d5cf235bc84181c
       return;
     }
 
-    ivr.play(text,log)
-    .then((d)=>{
-      ivr.record(5000,log)
-      .then((d)=>{
-        log.log(d);
-        switch (d) {
-          case 'Повторялка':outgoing.move({app:'ivr'});break;
-          case 'Автоответчики': outgoing.move({app:'amd'});break;
-          default:{
-            //let playback = new ari.Playback();
-            outgoing.move({app:'ivr'}).catch((e)=>{log.log(e)});
-            //outgoing.play({media:'recording:'+filename},playback);
-          };
-        }
-      })
-    })
+    // ivr.play(text,log)
+    // .then((d)=>{
+    //   ivr.record(5000,log)
+    //   .then((d)=>{
+    //     log.log(d);
+    //     // switch (d) {
+    //     //   case 'Повторялка':outgoing.move({app:'ivr'});break;
+    //     //   case 'Автоответчики': outgoing.move({app:'amd'});break;
+    //     //   default:{
+    //     //     //let playback = new ari.Playback();
+    //     //     outgoing.move({app:'ivr'}).catch((e)=>{log.log(e)});
+    //     //     //outgoing.play({media:'recording:'+filename},playback);
+    //     //   };
+    //     // }
+    //   })
+    // })
+
+    let t = text;
+    while(1) {
+      log.log('Start');
+      await ivr.play(t,log)
+      let d = await ivr.record(5000,log)
+      log.log(d);
+      if (d == 'завершить') {
+        ivr.play('Пока пока мой милый друг!',log);
+        outgoing.hangup();
+      }
+      if (!d) t = 'Продолжаем'
+      else t = d;
+    }
 
     outgoing.once('StasisEnd', function (event, ch) {
       log.log('StasisEnd: '+ch.id);

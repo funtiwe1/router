@@ -5,7 +5,7 @@ const Log = require('./utils.js').Log
 const asr = require('./speech').asr_s
 const tts = require('./speech').tts_f
 const getRTP = require('./utils').getRTP
-const playRecprd = require('./utils').playRecprd
+const playRecord = require('./utils').playRecord
 
 const encoding = 'LINEAR16';
 const sampleRateHertz = 16000;
@@ -88,6 +88,7 @@ record(time,log){
       });
   })
 }
+
 close() {
 
 }
